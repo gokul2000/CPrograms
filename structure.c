@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 int countOfShops=0,freeSpace=2;
+int FREQUENT_CUSTOMER_COND=2;
 typedef struct Date
 {
     int day;
@@ -37,7 +38,7 @@ void printCustomers(customer *c, int n)
     for (int i = 0; i < n; i++){
         printf("%d ",i+1);
         printCustomer(c[i]);
-        printf("*************************************************");
+        printf("*************************************************\n");
     }
 }
 typedef struct Shop{
@@ -64,6 +65,13 @@ void addShop(shop sh){
     listOfShops=realloc(listOfShops,freeSpace);
     }
     listOfShops[countOfShops]=sh;
+}
+shop reviewFreq(shop sh,customer c){
+    
+    if(c.countOfItems>=FREQUENT_CUSTOMER_COND)
+    sh.frequentCustomer[sh.countOfFrequentCustomers++]=c;
+
+    return sh;
 }
 void loginToShop(int index){
     int flag=1;
@@ -112,11 +120,25 @@ void loginToShop(int index){
                 c.itemList[i]=it;
 
             }
+            if(s.countOfAllCustomers>=s.availableFreeSpaceForAllCustomers)
+            {
+                s.availableFreeSpaceForAllCustomers*=2;
+                s.availableFreeSpaceForFavCustomers*=2;
+                s.allCustomer=realloc(s.allCustomer,s.availableFreeSpaceForAllCustomers);
+                s.frequentCustomer=realloc(s.frequentCustomer,s.availableFreeSpaceForFavCustomers);
+            }
             s.allCustomer[s.countOfAllCustomers]=c;
             s.countOfAllCustomers+=1;
+            s=reviewFreq(s,c);
             break;
         case 3:
             printCustomers(s.allCustomer,s.countOfAllCustomers);
+            break;
+        case 4:
+            
+            printCustomers(s.frequentCustomer,s.countOfFrequentCustomers);
+            break;
+
         
         default:
             break;
