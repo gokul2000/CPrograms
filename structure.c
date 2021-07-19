@@ -62,7 +62,17 @@ void addShop(shop sh){
     listOfShops[countOfShops]=sh;
 }
 void loginToShop(int index){
+    int flag=1;
     shop s= listOfShops[index];
+    do{
+        printf("1.Add a Customer..");
+        printf("\n2.Add a Frequent Customer..");
+        printf("\n3.Print Customers...");
+        printf("\n4.Print Frequent Customers");
+        int choice;
+        scanf("")
+
+    }while(flag==1);
     
 }
 int main()
