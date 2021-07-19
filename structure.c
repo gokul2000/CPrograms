@@ -19,6 +19,7 @@ typedef struct Customer{
   int age;
   char gender;
   item * itemList;
+  int availableSpace;
   int countOfItems;
 }customer;
 void printItem(item i){
@@ -33,8 +34,11 @@ void printCustomer(customer c)
 }
 void printCustomers(customer *c, int n)
 {
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++){
+        printf("%d ",i+1);
         printCustomer(c[i]);
+        printf("*************************************************");
+    }
 }
 typedef struct Shop{
     char shopName[101];
@@ -70,16 +74,49 @@ void loginToShop(int index){
         printf("\n3.Print Customers...");
         printf("\n4.Print Frequent Customers");
         int choice;
+        customer c;
         scanf("%d",&choice);
         switch (choice)
         {
         case 1:
-            customer c;
+            
             printf("Enter customer Name");
             char name[101];
             scanf("\n%[^\n]s", name);
-            
+            printf("Enter Mobile Number");
+            char mobileNo[101];
+            scanf("\n%[^\n]s", mobileNo);
+            printf("Enter Age");
+            int age;
+            scanf("%d",&age);
+            char gender;
+            printf("Enter M or F");
+            scanf("\n%c",&gender);
+            printf("Enter no Of itemsPurchased");
+            int number ;scanf("%d",&number);
+            strcpy(c.name,name);strcpy(c.mobileNo,mobileNo);c.age=age;c.gender=gender;
+            c.availableSpace=number+1;c.countOfItems=number;
+            c.itemList=malloc(sizeof(item)*c.availableSpace);
+            for(int i=0;i<number;i++)
+            {
+                item it;
+                printf("Enter Item %d name",i+1);
+                char name[101];scanf("\n%[^\n]s", name);
+                printf("Enter Item %d price",i+1);
+                int price ; scanf("%d",&price);
+                int day,month,year ; 
+                printf("Enter date as follows day month and year");
+                scanf("%d %d %d",&day,&month,&year);
+                date d ; d.day=day;d.month=month;d.year=year;
+                strcpy(it.name,name);it.price=price;it.dateOfItemPurchased=d;
+                c.itemList[i]=it;
+
+            }
+            s.allCustomer[s.countOfAllCustomers]=c;
+            s.countOfAllCustomers+=1;
             break;
+        case 3:
+            printCustomers(s.allCustomer,s.countOfAllCustomers);
         
         default:
             break;
