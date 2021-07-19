@@ -70,7 +70,7 @@ void loginToShop(int index){
         printf("\n3.Print Customers...");
         printf("\n4.Print Frequent Customers");
         int choice;
-        scanf("")
+        
 
     }while(flag==1);
     
