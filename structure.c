@@ -70,7 +70,20 @@ void loginToShop(int index){
         printf("\n3.Print Customers...");
         printf("\n4.Print Frequent Customers");
         int choice;
+        scanf("%d",&choice);
+        switch (choice)
+        {
+        case 1:
+            customer c;
+            printf("Enter customer Name");
+            char name[101];
+            scanf("\n%[^\n]s", name);
+            
+            break;
         
+        default:
+            break;
+        }
 
     }while(flag==1);
     
